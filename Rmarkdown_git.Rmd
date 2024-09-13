@@ -1,0 +1,37 @@
+---
+title: "my first Rmarkdown"
+author: "Haoshu Hsu"   
+date: "2024-09-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+#設定資料路徑
+```{r}
+setwd('D:/台大課程/113-1/r生態資料/data')
+```
+
+#將excel檔案讀到r裡面
+```{r}
+fish<-read.table('reef_fish.txt', header = T, sep='\t', dec='.')
+```
+#顯示fish
+```{r}
+fish
+```
+
+#作圖
+
+```{r fish richness, echo=T}
+barplot(fish$richness, 
+        main="Top 10 reef fish Richness (Allen, 2000)", 
+        horiz=TRUE, 
+        names.arg=fish$country, 
+        cex.names=0.5, las=1)
+```
+
+
