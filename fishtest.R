@@ -9,4 +9,4 @@ barplot(fish$richness,
         cex.names=0.5, las=1)
  
 
-print("123")
+
