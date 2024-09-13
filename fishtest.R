@@ -7,3 +7,5 @@ barplot(fish$richness,
         horiz=TRUE, 
         names.arg=fish$country, 
         cex.names=0.5, las=1)
+
+library(usethis)
