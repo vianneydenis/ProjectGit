@@ -1,5 +1,5 @@
 #Basic operation
-
+ 
 getwd()
 setwd("D:/台大課程/112-2/穩定同位素")
 
