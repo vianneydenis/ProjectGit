@@ -2,11 +2,7 @@
 
 getwd()
 setwd("D:/台大課程/112-2/穩定同位素")
-
 siaplot<-read.table("SIA2.txt", TRUE , '\t' , '_')
-
-
-
 library(ggplot2)
 
 #C13與N15作圖
