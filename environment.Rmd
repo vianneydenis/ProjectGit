@@ -1,5 +1,5 @@
->///<---
-title: "..."
+---
+title: "WEEK2 HOMEWORK"
 ---
 
 ```{r eval = TRUE,  message=F, include=FALSE, warning=F, purl=F, results="hide"}
@@ -362,7 +362,7 @@ Visit R markdown [webpage](https://rmarkdown.rstudio.com/) for an overview of it
 <span style="color: red">**ADVANCED**</span> On the top of this **Environment** page, you  download a *environment.Rmd*. By knitting it in RStudio, you should be able to **render** this *.Rmd* as html page similar to the present webpage. This entire website is built using RStudio, so the page may look a bit different - yet you should get something :) In order for it to work you would have to: (1) install **ALL** the packages used in this *.Rmd* (`knitr`, `xfun`, `abc`, `vegan`, `readxl`, `formatR`, etc.) (2) make sure to have in your working directory a file called **Data** where you will have downloaded `reef_fish.xlsx` and generated `reef_fish.txt` (tip: see practice 1.2). 
 
 
-<span style="color: red">**EXPERT**</span> This [repository](https://github.com/vianneydenis/OCEAN5098.git) available on GitHub is the working directory of the OCEAN5098.Rproj file and it contains all of the .Rmd, .html and data files used to review this course. While you can can individually download and render the .Rmd files. It is better to **fork** this repository to your GitHub account, then clone a copy of this forked repository (from your own Github account to your computer). It requires advanced understanding on several aspects of R, RStudio, and R Markdown but you may be adventurous and give it a try. This will take some time.  
+<span style="color: red">**EXPERT**</span> This [repository](https://github.com/vianneydenis/OCEAN5098B.git) available on GitHub is the working directory of the OCEAN5098B.Rproj file and it contains all of the .Rmd, .html and data files used to review this course. While you can can individually download and render the .Rmd files. It is better to **fork** this repository to your GitHub account, then clone a copy of this forked repository (from your own Github account to your computer) and use the function `render_site` of the `rmarkdown` package. It requires advanced understanding on several aspects of R, RStudio, and R Markdown but you may be adventurous and give it a try. This will take some time.  
 
 
 # Git/GitHub
