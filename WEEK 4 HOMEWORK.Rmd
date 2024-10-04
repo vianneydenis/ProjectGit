@@ -16,7 +16,7 @@ library(tidyr)
 undonereef <- read.table('https://www.dipintothereef.com/uploads/3/7/3/5/37359245/rairuoho.txt',header=T, sep="\t", dec='.')
 ```
 
-#STEP1:remove variable "row" and "column"
+#STEP1:remove variables "row" and "column"
 #STEP2:replace "nutrient" to "enriched" in variable "treatment
 #STEP3:combine variable "spatial1" and "spatial2" into "spatial"
 #STEP4:combine variable "day3-8" into "day" and add a new variable "length" to get the length of the grass on the given day 
@@ -28,7 +28,7 @@ donereef <- undonereef %>%
   pivot_longer(c(1:6) , names_to = "day", values_to = "length" )
 ```
 
-#turn column "day" from character into factor 
+#turn variable "day" from character into factor 
 ```{r}
 donereef$day <- as.factor(donereef$day)
 ```
@@ -42,6 +42,3 @@ donereef
 ```{r}
 head(undonereef , 10)
 ```
-
-
-
