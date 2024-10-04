@@ -1,0 +1,47 @@
+---
+title: "WEEK 4 HOMEWORK" 
+author: "Calvin Hsu"
+date: "2024-10-04"
+output: html_document
+---
+
+#initiate packages 
+```{r}
+library(dplyr)
+library(tidyr) 
+```
+
+#download undone data into r
+```{r}
+undonereef <- read.table('https://www.dipintothereef.com/uploads/3/7/3/5/37359245/rairuoho.txt',header=T, sep="\t", dec='.')
+```
+
+#STEP1:remove variable "row" and "column"
+#STEP2:replace "nutrient" to "enriched" in variable "treatment
+#STEP3:combine variable "spatial1" and "spatial2" into "spatial"
+#STEP4:combine variable "day3-8" into "day" and add a new variable "length" to get the length of the grass on the given day 
+```{r}
+donereef <- undonereef %>%
+  select(-row , -column)%>%
+  mutate(treatment = ifelse(treatment == "nutrient" , "enriched" , "water"))%>%
+  unite("spatial" , spatial1 , spatial2 , sep = "_")%>%
+  pivot_longer(c(1:6) , names_to = "day", values_to = "length" )
+```
+
+#turn column "day" from character into factor 
+```{r}
+donereef$day <- as.factor(donereef$day)
+```
+
+#result
+```{r}
+donereef
+```
+
+#compare to undone data
+```{r}
+head(undonereef , 10)
+```
+
+
+
