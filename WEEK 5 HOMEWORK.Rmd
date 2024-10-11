@@ -1,0 +1,54 @@
+--- 
+title: "WEEK 5 HOMEWORK"
+author: "Calvin Hsu"
+date: "2024-10-11"
+output: html_document
+---
+create growth experient data frame
+```{r}
+height_record <- data.frame(plants = c("plant1" , "plant2" , "plant3" , "plant4" , "plant5"),
+                            start = c(10.0 , 9.8 , 12.7 , 16.5 , 7.3), 
+                            end = c(211.5 , 153.6 , 256.7 , 315.8 , 173.1))
+```
+change row names from 1-5 into plant1-5
+```{r}
+rownames(height_record) <- c("plant1" , "plant2" , "plant3" , "plant4" , "plant5")
+```
+
+reformat data frame to longer version
+```{r}
+library(tidyr)
+```
+```{r}
+height_record_longer <- height_record%>%
+  pivot_longer(c(2:3) , names_to = "time" , values_to = "height")
+```
+turn variable "time" into factor and assign order
+```{r}
+height_record_longer$time <- factor(height_record_longer$time , levels = c("start" , "end"))
+```
+
+calculate growth rate in percentage
+```{r}
+growth_rate = ((height_record$end-height_record$start)/height_record$start)*100
+```
+create growth list
+```{r}
+growth <- list(name = rownames(height_record),
+               growth = growth_rate,
+               combinaiton = data.frame(plant = height_record$plants,
+                                        gorwth = growth_rate))
+```
+
+create final list
+```{r}
+my.experient <- list(heightrecord = height_record_longer,
+                     growth = growth, 
+                     note = "fast as fk boiii!!!")
+```
+
+result
+```{r}
+my.experient
+```
+
