@@ -1,0 +1,66 @@
+---
+title: "WEEK 6 HOMEWORK"
+author: "Calvin Hsu"
+date: "2024-10-18"
+output: html_document
+---
+
+**create pdf in my working directory**
+```{r}
+setwd("D:/台大課程/113-1/r生態資料")
+pdf(file = "week6 homework.pdf", paper = "A4")
+```
+
+**loading data**
+```{r}
+data("iris")
+```
+
+**saperate species into groups of 1 to 3 so i can assign different types of dots**
+```{r}
+pch_values <- as.numeric(iris$Species)
+```
+
+**plotting and adding elements**
+```{r}
+plot(iris$Petal.Length , iris$Petal.Width , 
+     col = iris$Species,
+     pch = pch_values,
+     xlab = "Petal length (cm)", ylab = "Petal width (cm)",
+     main = "Petal width vs. Petal length \n R12241201")
+```
+
+**add regression using lm function**
+```{r}
+plot(iris$Petal.Length , iris$Petal.Width , 
+     col = iris$Species,
+     pch = pch_values,
+     xlab = "Petal length (cm)", ylab = "Petal width (cm)",
+     main = "Petal width vs. Petal length \n R12241201")
+
+fittedline <- lm(Petal.Width ~ Petal.Length , iris)
+abline(fittedline , lty = 1)
+```
+
+**add words to specific place**
+```{r}
+plot(iris$Petal.Length , iris$Petal.Width , 
+     col = iris$Species,
+     pch = pch_values,
+     xlab = "Petal length (cm)", ylab = "Petal width (cm)",
+     main = "Petal width vs. Petal length \n R12241201")
+
+fittedline <- lm(Petal.Width ~ Petal.Length , iris)
+abline(fittedline , lty = 1)
+
+legend("topleft",legend=c("setosa" , "versicolor", "virginica"), col=c("black" , "red" , "green"), pch = c(1:3)) 
+text(5,0.5 , 'R= 0.96')
+```
+
+**export**
+```{r}
+dev.off()
+```
+
+
+
