@@ -16,7 +16,7 @@ pdf(file = "week6 homework.pdf", paper = "A4")
 data("iris")
 ```
 
-**saperate species into groups of 1 to 3 so i can assign different types of dots**
+**separate species into groups of 1 to 3 so i can assign different types of dots**
 ```{r}
 pch_values <- as.numeric(iris$Species)
 ```
@@ -54,7 +54,11 @@ fittedline <- lm(Petal.Width ~ Petal.Length , iris)
 abline(fittedline , lty = 1)
 
 legend("topleft",legend=c("setosa" , "versicolor", "virginica"), col=c("black" , "red" , "green"), pch = c(1:3)) 
-text(5,0.5 , 'R= 0.96')
+text(5,0.5 , 'R= 0.96') 
+
+# good you can also try: 
+#r_value <- summary(fittedline)$r.squared
+#text(5.5, 0.5, labels = paste("R = ", round(sqrt(r_value), 2)), pos = 4)
 ```
 
 **export**
