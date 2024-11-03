@@ -1,0 +1,31 @@
+---
+title: "WEEK 8 HOMEWORK"
+author: "Calvin Hsu"
+date: "2024-11-03"
+output: html_document
+---
+
+**packeges**
+```{r}
+library(rgbif)
+library(leaflet)
+```
+
+**download species**
+```{r}
+spotted_dove <- occ_search(scientificName = "Spilopelia chinensis", hasCoordinate=T, basisOfRecord='HUMAN_OBSERVATION', limit = 1000) 
+spotted_dove <- spotted_dove$data
+```
+
+**mapping**
+```{r}
+spotted_dove_map <- leaflet(data = spotted_dove) %>%
+  addTiles() %>%
+  fitBounds(lng1 = 119, lat1 = 21, lng2 = 122, lat2 = 26) %>%
+  addCircleMarkers(~decimalLongitude, ~decimalLatitude, color = "red", radius = 3, opacity = 0.6) %>%
+  addLegend("topright", colors = "red", labels = "Spotted Dove", title = "Species")
+
+spotted_dove_map
+```
+
+
