@@ -116,4 +116,4 @@ ggplot(data = df, aes(x = water_day3 , y = water_day8)) +
 
 When the duration of the experiment was not long enough (day3 & day4), both treatments showed positive correlation significantly, r = 0.77 / p = 8.94e-06 for enriched and r = 0.79 / p = 5.2e-06 for water. Probably due to the effect of treatment had not been activated yet. 
 
-When both treatments reached the 8th day, although correlation was lower compared to the two-day growth (r = 0.46) in water treatment, it was still significant (p = 0.02). But the correlation was very low (r = 0.24) and no significant (p = 0.26) in the enriched treatment. Probably due to the plants had absorbed the nutrient so that the change of growth become larger. 
+When both treatments reached the 8th day, although the correlation was lower compared to the two-day growth (r = 0.46) in water treatment, it was still significant (p = 0.02). But the correlation was very low (r = 0.24) and no significant was found (p = 0.26) in the enriched treatment. Probably due to the plants had absorbed the nutrient so that the change of growth becomes larger. 
