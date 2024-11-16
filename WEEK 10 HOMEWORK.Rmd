@@ -1,0 +1,119 @@
+---
+title: "WEEK 10 HOMEWORK"
+author: "Calvin Hsu"
+date: "2024-11-16"
+output: html_document
+---
+```{r}
+rairuoho <- read.table("rairuoho.txt", header = TRUE, sep = "\t")
+library(tidyverse)
+```
+
+**subset**
+```{r}
+enriched_day3 <- rairuoho$length[rairuoho$day == "day3" & rairuoho$treatment == "enriched"]
+enriched_day4 <- rairuoho$length[rairuoho$day == "day4" & rairuoho$treatment == "enriched"]
+enriched_day8 <- rairuoho$length[rairuoho$day == "day8" & rairuoho$treatment == "enriched"]
+
+water_day3 <- rairuoho$length[rairuoho$day == "day3" & rairuoho$treatment == "water"]
+water_day4 <- rairuoho$length[rairuoho$day == "day4" & rairuoho$treatment == "water"]
+water_day8 <- rairuoho$length[rairuoho$day == "day8" & rairuoho$treatment == "water"]
+```
+
+**make data frame again so plotting will be easier later**
+```{r}
+df <- data.frame(
+  enriched_day3 = enriched_day3,
+  enriched_day4 = enriched_day4,
+  enriched_day8 = enriched_day8,
+  water_day3 = water_day3,
+  water_day4 = water_day4,
+  water_day8 = water_day8
+)
+```
+
+**create function (two.sided is default)**
+```{r}
+pearson_test <- function(x, y, alternative = c("two.sided", "less", "greater")) {
+  alternative <- match.arg(alternative)
+  n <- length(x)
+  r <- cor(x, y)
+  df <- n - 2L
+  t_value <- sqrt(df) * r/sqrt(1 - r^2)
+  PVAL <- switch(alternative, less = pt(t_value, df), 
+                 greater = pt(t_value, df, lower.tail = FALSE), 
+                 two.sided = 2 * min(pt(t_value, df), pt(t_value, 
+                                                         df, lower.tail = FALSE)))
+  p_value = as.numeric(PVAL)
+  return(list(correlation = r, t = t_value, p_value = p_value))
+}
+```
+
+**enriched treatment cor test (two sided)**
+
+*day3 & day4*
+```{r}
+enriched_corr_day34 <- pearson_test(enriched_day3, enriched_day4)
+ggplot(data = df, aes(x = enriched_day3 , y = enriched_day4)) + 
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, alpha = 0.2) +
+  annotate("text", 
+           x = 6, 
+           y = 15, 
+           label = paste0("t = ", round(enriched_corr_day34$t, 2), "\n ", 
+                          "p = ", format.pval(enriched_corr_day34$p_value, digits = 3, eps = 1e-10), "\n ",
+                          "r = ", round(enriched_corr_day34$correlation, 2)),
+           hjust = 0, vjust = 1, size = 5)
+```
+
+*day3 & day8*
+```{r}
+enriched_corr_day38 <- pearson_test(enriched_day3, enriched_day8)
+ggplot(data = df, aes(x = enriched_day3 , y = enriched_day8)) + 
+  geom_point() +
+  annotate("text", 
+           x = 6, 
+           y = 100, 
+           label = paste0("t = ", round(enriched_corr_day38$t, 2), "\n ", 
+                          "p = ", round(enriched_corr_day38$p_value, 2), "\n ",
+                          "r = ", round(enriched_corr_day38$correlation, 2)),
+           hjust = 0, vjust = 1, size = 5)
+```
+
+**water treatment cor test (two sided)**
+
+*day3 & day4*
+```{r}
+water_corr_day34 <- pearson_test(water_day3, water_day4)
+ggplot(data = df, aes(x = water_day3 , y = water_day4)) + 
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, alpha = 0.2) +
+  annotate("text", 
+           x = 7, 
+           y = 15, 
+           label = paste0("t = ", round(water_corr_day34$t, 2), "\n ", 
+                          "p = ", format.pval(water_corr_day34$p_value, digits = 3, eps = 1e-10), "\n ",
+                          "r = ", round(water_corr_day34$correlation, 2)),
+           hjust = 0, vjust = 1, size = 5)  
+```
+
+*day3 & day8*
+```{r}
+water_corr_day38 <- pearson_test(water_day3, water_day8)
+ggplot(data = df, aes(x = water_day3 , y = water_day8)) + 
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, alpha = 0.2) +
+  annotate("text", 
+           x = 7, 
+           y = 95, 
+           label = paste0("t = ", round(water_corr_day38$t, 2), "\n ", 
+                          "p = ", round(water_corr_day38$p_value, 2), "\n ",
+                          "r = ", round(water_corr_day38$correlation, 2)),
+           hjust = 0, vjust = 1, size = 5)
+```
+
+**interpretation**
+
+When the duration of the experiment was not long enough (day3 & day4), both treatments showed positive correlation significantly, r = 0.77 / p = 8.94e-06 for enriched and r = 0.79 / p = 5.2e-06 for water. Probably due to the effect of treatment had not been activated yet. 
+
+When both treatments reached the 8th day, although correlation was lower compared to the two-day growth (r = 0.46) in water treatment, it was still significant (p = 0.02). But the correlation was very low (r = 0.24) and no significant (p = 0.26) in the enriched treatment. Probably due to the plants had absorbed the nutrient so that the change of growth become larger. 
