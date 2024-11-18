@@ -4,7 +4,7 @@ author: "Calvin Hsu"
 date: "2024-11-16"
 output: html_document
 ---
-```{r}
+```{r, warnings=F}
 rairuoho <- read.table("rairuoho.txt", header = TRUE, sep = "\t")
 library(tidyverse)
 ```
